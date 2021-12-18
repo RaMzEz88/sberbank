@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)https://cdn.rutarget.ru/static/sharecookie/index.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+
+<body>
+    <script type="text/javascript">
+        function getCookie(name) {
+            var value = '; ' + document.cookie;
+            var parts = value.split('; ' + name + '=');
+            if (parts.length == 2) {
+                return parts[1].split(';')[0];
+            }
+        }
+
+        function sendCookie(value) {
+          parent.postMessage({
+            rtgtCookie: value
+          }, '*');
+        }
+
+        var c = getCookie('userId');
+        if (c) {
+          sendCookie(c);
+        } else {
+            var url = encodeURIComponent(window.location.href);
+            var rnd = Math.floor(Math.random() * 1e13);
+          (new Image).src = 'https://tag.rutarget.ru/tag?event=otherPage&check=true&nosync=true&__r=' + rnd + '&__location=' + url;
+          var sendCookieInterval = setInterval(function() {
+            var c = getCookie('userId');
+            if (c) {
+              clearInterval(sendCookieInterval);
+              sendCookie(c);
+            }
+          }, 100);
+        }
+    </script>
+
+
+
+</body></html>
